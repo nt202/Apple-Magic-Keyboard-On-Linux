@@ -1,0 +1,10 @@
+[Unit]
+Description=Apple Magic Keyboard On Linux
+
+[Service]
+ExecStart=/opt/apple-magic-keyboard-on-linux/apple-magic-keyboard-on-linux
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

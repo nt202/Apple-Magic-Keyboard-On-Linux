@@ -3,18 +3,18 @@
 
 Tired of losing your macOS muscle memory on Linux? This tool remaps your **Apple Magic Keyboard** to behave like it does on macOS, with bonus Vim-style `HJKL` arrow keys. No more fighting with defaults!  
 
-![Demo GIF or screenshot could go here]  
+![](assets/screenshots/apple-magic-keyboard-on-linux.jpeg)   
 
 ## Why This Exists  
 - You love macOS shortcuts but use Linux.  
 - You want `HJKL` as arrow keys *everywhere* (like Vim).  
-- The Magic Keyboard’s `Fn`/`Ctrl`/`Meta` keys don’t work out-of-the-box on Linux.  
+- The Magic Keyboard’s `Fn`/`Ctrl`/`Command` keys don’t work out-of-the-box on Linux.  
 
 ## Features  
 - **Swap `CapsLock` ↔ `Esc`** (for Vim users).  
 - **Remap `Fn + HJKL` to arrow keys** (left/down/up/right).  
 - **Fix `§`/`~` key mismaps** (common on non-macOS systems).  
-- **Meta (⌘) → Ctrl** for macOS-like shortcuts.  
+- **Command (⌘) → Ctrl** for macOS-like shortcuts.  
 
 ## Customizing  
 Edit `src/main.rs` to tweak key mappings. Need to find your keycodes? Use:  
