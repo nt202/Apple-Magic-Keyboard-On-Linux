@@ -2,7 +2,7 @@
 Description=Apple Magic Keyboard On Linux
 
 [Service]
-ExecStart=/opt/apple-magic-keyboard-on-linux/apple-magic-keyboard-on-linux
+ExecStart=/opt/apple-magic-keyboard-on-linux/Apple-Magic-Keyboard-On-Linux
 Restart=always
 User=root
 

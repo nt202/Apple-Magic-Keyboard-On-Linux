@@ -1,0 +1,59 @@
+name: Release Linux Binaries
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write  # Required for creating releases
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target: [
+          x86_64-unknown-linux-musl,
+          armv7-unknown-linux-musleabihf,
+          aarch64-unknown-linux-musl
+        ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cross
+        run: cargo install cross
+
+      - name: Build
+        run: cross build --release --target ${{ matrix.target }}
+
+      - name: Prepare binary
+        run: |
+          mkdir -p release
+          cp target/${{ matrix.target }}/release/Apple-Magic-Keyboard-On-Linux \
+             release/Apple-Magic-Keyboard-On-Linux-${{ matrix.target }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-binaries-${{ matrix.target }}
+          path: release/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: linux-binaries-*
+          merge-multiple: true
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/Apple-Magic-Keyboard-On-Linux-x86_64-unknown-linux-musl
+            artifacts/Apple-Magic-Keyboard-On-Linux-armv7-unknown-linux-musleabihf
+            artifacts/Apple-Magic-Keyboard-On-Linux-aarch64-unknown-linux-musl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
